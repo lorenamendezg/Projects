@@ -67,6 +67,39 @@ aggregate(annualv2$ride_length ~ annualv2$member_casual + annualv2$day_of_week, 
 
 #order day of week
 annualv2$day_of_week <- ordered(annualv2$day_of_week,
-                                levels=c("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"))
+                                levels=c("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saheaturday"))
+
+# Now, let's run the average ride time by each day for members vs casual users
+aggregate(annualv2$ride_length ~ annualv2$member_casual + annualv2$day_of_week, FUN = mean)
+
+# analyze ridership data by type and weekday
+annualv2 %>% 
+  mutate(weekday = wday(started_at, label = TRUE)) %>% 
+  group_by(member_casual, weekday) %>%
+  summarise(number_of_rides = n(),
+            average_duration = mean(ride_length)) %>%
+            arrange(member_casual, weekday)	
+
+##VISUALIZATION
+
+##Plot 3Rides by typer user
+annualv2 %>% 
+  mutate(weekday = wday(started_at, label = TRUE)) %>% 
+  group_by(member_casual, weekday) %>% 
+  summarise(number_of_rides = n()
+            ,average_duration = mean(ride_length)) %>% 
+  arrange(member_casual, weekday)  %>% 
+  ggplot(aes(x = weekday, y = number_of_rides, fill = member_casual)) +
+  geom_col(position = "dodge")
+
+##Plot Average duration
+annualv2 %>% 
+  mutate(weekday = wday(started_at, label = TRUE)) %>% 
+  group_by(member_casual, weekday) %>% 
+  summarise(number_of_rides = n()
+            ,average_duration = mean(ride_length)) %>% 
+  arrange(member_casual, weekday)  %>% 
+  ggplot(aes(x = weekday, y = average_duration, fill = member_casual)) +
+  geom_col(position = "dodge")
 
 
