@@ -1,0 +1,119 @@
+---
+title: "Cyclistic Bikes: User Performance"
+author: "Lorena Méndez"
+date: "April 25th, 2022"
+output:
+  prettydoc::html_pretty:
+    theme: architect
+    highlight: github
+---
+
+## Why converting casual members into annual members is possible??....
+
+We used available data to find some connections or patterns in how our members using Cyclistic Bikes differently.
+
+## Prepare and Clean Data
+
+Explore our date is the most and important step in our analysis.
+
+```{r Read cvs files}
+a <- read.csv("202201-divvy-tripdata.csv")
+
+colnames(a)
+str(a)
+```
+
+We worked with data from April 2021, to March 2022. Those all data was in `.csv` files and we combine the information into a single file. For example:
+
+``` yaml
+##Quarters
+
+mar_2022 <- read_csv("202203-divvy-tripdata.csv")
+feb_2022 <- read_csv("202202-divvy-tripdata.csv")
+jan_2022 <- read_csv("202201-divvy-tripdata.csv")
+
+q1 <- bind_rows(jan_2022, feb_2022, mar_2022)
+```
+
+This exercise we did with the remaining 9 months.
+
+## Clean Up and Add Data
+
+After review our columns for our analysis just using the columns related our problem, for that reason we eliminate some information:
+
+    q1 <- q1 %>% 
+      select(-c(start_station_name, start_station_id, end_station_name, 
+                end_station_id, start_lat, start_lng, end_lat, end_lng))
+
+After all this process we get just one file clean and ready to use called: `annualv2`
+
+```{r Read csv file}
+annualv2 <- read.csv("annualv2.csv")
+
+```
+
+### 1. Add columns that list the date, month, day, and year of each ride.
+
+    annual$date <- as.Date(annual$started_at)
+    annual$month <- format(as.Date(annual$started_at), "%m")
+    annual$day <- format(as.Date(annual$started_at), "%d")
+    annual$year <- format(as.Date(annual$started_at), "%Y")
+    annual$day_of_week <- format(as.Date(annual$started_at), "%A")
+
+### 2. Add a "ride_length" calculation (in seconds)
+
+    annual$ride_length <- difftime(annual$ended_at,annual$started_at)
+
+```{r Colnames annualv2}
+
+colnames(annualv2)
+```
+
+### 3. Remove bad data (negative results)
+
+    is.factor(annual$ride_length)
+    annual$ride_length <- as.numeric(as.character(annual$ride_length))
+    is.numeric(annual$ride_length)
+
+    annualv2 <- annual[!(annual$ride_length<0),]
+
+After all this process we get just one file clean and ready to use called: `annualv2`
+
+```{r head annualv2}
+
+head(annualv2)
+```
+
+## Descriptive Analysis
+
+### 1. Descriptive analysis on ride_lenght
+
+```{r Descriptive analysis}
+mean(annualv2$ride_length)
+median(annualv2$ride_length)
+max(annualv2$ride_length)
+min(annualv2$ride_length)
+
+```
+
+In summary,
+
+```{r summary annualv2}
+
+summary(annualv2$ride_length)
+```
+
+### 2. Ride_lenght by type of user
+
+For our client is important to know which is the average by type of user, this information is consolidate in seconds (sec).
+
+```{r Average by user type in seconds}
+an2 <- aggregate(annualv2$ride_length ~ annualv2$member_casual, FUN = mean)
+head(an2)
+```
+
+
+
+## Stay Tuned
+
+Please visit my [**website**](https://lorenamendezg.github.io/) to know about me, my projects and my new road for the data world. Comments, bug reports and pull requests are always welcome.
