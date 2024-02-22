@@ -39,24 +39,59 @@ Code M:
 
 - Model Framework: Import model, because I can integrate source data. Support all DAX and Power Query (M) functionality. - Support calculated tables. Deliver the best query performance.
 - Semantic Model: Create a Data table, create relationships, use relationship function to create a viz using the same calendar table.
+
 ![USERELATIONSHIP()](image-3.png)
 
-- Measures, Calculate tables and columns: Simple Measures (SUM, AVERAGE, COUNT, DISTINCTCOUNT, COUNTROWS).
+- Measures, Calculate tables and columns:
+Some of the measures and calculate tables and columns are the following:
+    
+    ## Measures
+    Delivery Qty = CALCULATE(COUNT(Sales[SalesOrderNumber]), USERELATIONSHIP(Sales[ShipDate],'Calendar'[Date]))
+    Profit = [Total Revenue] - [ProductCost]
+    Qty Products Sold = SUM(Sales[OrderQuantity])
+    TOP10 Products = SUMX(
+                    TOPN( 5, 'Product', 'Product'[ProductName], ASC), [TotalSales])
+    TotalBudget = Sum(Budget[BudgetAmount])
+    Variance = Sales[TotalSales] - Budget[TotalBudget]
+    Variance% = DIVIDE([Variance], Budget[TotalBudget])
+    Average Price = AVERAGE(Sales[UnitPrice])
+    Count Rows = COUNTROWS(Sales)
+    Qty Shipped = DISTINCTCOUNT(Sales[SalesOrderLineNumber])
+    Max Price = MAX(Sales[UnitPrice])
+    Mini Price = MIN(Sales[UnitPrice])
+    
+    ## Calculate Tables
+    Pct Sales Forecast = GENERATESERIES(CURRENCY(1), CURRENCY(1.5), CURRENCY(0.05))
+    Pct Sales Forecast Value = SELECTEDVALUE('Pct Sales Forecast'[Pct Sales Forecast], 100)
+    Ship Date = 'Date'
+
+    ## Calculate Columns
+    Days to Send = DATEDIFF(Sales[OrderDate], Sales[ShipDate] ,DAY)
+    Total Sales Amount = Sales[SalesAmount] + Sales[TaxAmt]
+
 ![Measures](image-4.png)
 
-- Calculate Tables and What if Parameter.
+- What if Parameter.
 ![Calculate Tables](image-5.png)
-
-- Time Intelligence.
 
 
 ## Visualization
-Turn data into interactive, actionable insights. Configure report visuals: Filter, group, summarize.
-![Sales Report](image.png)
+Turn data into interactive, actionable insights. Here is the final result with the information provided for Adventure Works.
 
-![Decomposition Tree](image-6.png)
+![Sales Report 2016](image.png)
 
-## Optimize the model
+![What if Parameter](image-6.png)
 
-## Security
+# Insights 
+
+## Sales Performance Analysis for the Year 2016:
+
+A meticulous examination reveals a 2.3% variance between the actual sales and the budgeted figures during the fiscal year 2016. This variance necessitates further investigation to identify contributing factors and potential areas for optimization.
+
+Profitability by Product Category:
+The product category demonstrating the most substantial profit margin is accessories. This suggests a strategic focus on accessories could be advantageous for enhancing overall profitability.
+
+Sales Point Performance by Day of the Week:
+In scrutinizing sales patterns across the week, it is evident that Sundays and Mondays consistently record the highest sales figures. In contrast, Fridays exhibit the lowest sales performance throughout the year. Understanding and leveraging these day-specific trends could inform targeted marketing or operational strategies to maximize sales potential.
+
 
