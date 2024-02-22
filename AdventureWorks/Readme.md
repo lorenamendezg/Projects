@@ -8,6 +8,11 @@ Get Data: In Power BI, on the Home tab, select Get data, select Excel. After the
 
 ## Clean, transform, and load data
 
+The primary objective is to convert Excel data into a format compatible with Power BI. 
+
+![Transform Data](image-2.png)
+
+I developed the following task:
 - Identify column headers and names.
 - Remove top rows and promote headers.
 - Apply unpivot columns.
@@ -30,8 +35,6 @@ Code M:
 
 
 
-![Transform Data](image-2.png)
-
 ## Model Data
 
 - Star Schema: Determined Fact tables (Sales) and dimension tables (Budget, Product, Customer, Territories).
@@ -45,8 +48,8 @@ Code M:
 - Measures, Calculate tables and columns:
 Some of the measures and calculate tables and columns are the following:
     
-    > Measures
-    ```Delivery Qty = CALCULATE(COUNT(Sales[SalesOrderNumber]), USERELATIONSHIP(Sales[ShipDate],'Calendar'[Date]))
+    ``` > Measures
+    Delivery Qty = CALCULATE(COUNT(Sales[SalesOrderNumber]), USERELATIONSHIP(Sales[ShipDate],'Calendar'[Date]))
     Profit = [Total Revenue] - [ProductCost]
     Qty Products Sold = SUM(Sales[OrderQuantity])
     TOP10 Products = SUMX(
@@ -58,20 +61,21 @@ Some of the measures and calculate tables and columns are the following:
     Count Rows = COUNTROWS(Sales)
     Qty Shipped = DISTINCTCOUNT(Sales[SalesOrderLineNumber])
     Max Price = MAX(Sales[UnitPrice])
-    Mini Price = MIN(Sales[UnitPrice])```
+    Mini Price = MIN(Sales[UnitPrice])
     
     > Calculate Tables
-   ``` Pct Sales Forecast = GENERATESERIES(CURRENCY(1), CURRENCY(1.5), CURRENCY(0.05))
+    Pct Sales Forecast = GENERATESERIES(CURRENCY(1), CURRENCY(1.5), CURRENCY(0.05))
     Pct Sales Forecast Value = SELECTEDVALUE('Pct Sales Forecast'[Pct Sales Forecast], 100)
-    Ship Date = 'Date'```
+    Ship Date = 'Date'
 
     > Calculate Columns
-    ```Days to Send = DATEDIFF(Sales[OrderDate], Sales[ShipDate] ,DAY)
+    Days to Send = DATEDIFF(Sales[OrderDate], Sales[ShipDate] ,DAY)
     Total Sales Amount = Sales[SalesAmount] + Sales[TaxAmt]```
 
+- Displayed here is a visualization incorporating specific filters and measures designed to identify the top three product categories with the highest quantity of products sold per order.
 ![Measures](image-4.png)
 
-- What if Parameter.
+- With the following viz, the management team can visualize which is the percentage that they need to increase the sales to report sales for more that 2´000.000 during the three months with more sales (Sales Forecasting). Utilizing the 'What If' parameter, it becomes feasible to present diverse scenarios, offering insights into monthly variations and percentage adjustments.
 ![Calculate Tables](image-5.png)
 
 
@@ -94,5 +98,5 @@ The product category demonstrating the most substantial profit margin is accesso
 Sales Point Performance by Day of the Week:
 In scrutinizing sales patterns across the week, it is evident that Sundays and Mondays consistently record the highest sales figures. In contrast, Fridays exhibit the lowest sales performance throughout the year. Understanding and leveraging these day-specific trends could inform targeted marketing or operational strategies to maximize sales potential.
 
-> [!Thanks to Microsoft Learn]
-> This self-paced way was useful to prepare my training in Power BI. https://learn.microsoft.com/en-gb/credentials/certifications/power-bi-data-analyst-associate/ 
+> [!NOTE]
+> Thanks to Microsoft Learn. This self-paced way was useful to prepare my training in Power BI. https://learn.microsoft.com/en-gb/credentials/certifications/power-bi-data-analyst-associate/ 
