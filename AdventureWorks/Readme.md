@@ -10,7 +10,7 @@ Get Data: In Power BI, on the Home tab, select Get data, select Excel. After the
 
 The primary objective is to convert Excel data into a format compatible with Power BI. 
 
-![Transform Data](image-2.png)
+![Transform Data](Images/image-2.png)
 
 I developed the following task:
 - Identify column headers and names.
@@ -38,12 +38,12 @@ Code M:
 ## Model Data
 
 - Star Schema: Determined Fact tables (Sales) and dimension tables (Budget, Product, Customer, Territories).
-![Star Schema](image-1.png)
+![Star Schema](Images/image-1.png)
 
 - Model Framework: Import model, because I can integrate source data. Support all DAX and Power Query (M) functionality. - Support calculated tables. Deliver the best query performance.
 - Semantic Model: Create a Data table, create relationships, use relationship function to create a viz using the same calendar table.
 
-![USERELATIONSHIP()](image-3.png)
+![USERELATIONSHIP()](Images/image-3.png)
 
 - Measures, Calculate tables and columns:
 Some of the measures and calculate tables and columns are the following:
@@ -73,10 +73,10 @@ Some of the measures and calculate tables and columns are the following:
     Total Sales Amount = Sales[SalesAmount] + Sales[TaxAmt]```
 
 - Displayed here is a visualization incorporating specific filters and measures designed to identify the top three product categories with the highest quantity of products sold per order.
-![Measures](image-4.png)
+![Measures](Images/image-4.png)
 
 - With the following viz, the management team can visualize which is the percentage that they need to increase the sales to report sales for more that 2´000.000 during the three months with more sales (Sales Forecasting). Utilizing the 'What If' parameter, it becomes feasible to present diverse scenarios, offering insights into monthly variations and percentage adjustments.
-![Calculate Tables](image-5.png)
+![Calculate Tables](Images/image-5.png)
 
 
 ## Visualization
@@ -84,7 +84,7 @@ Turn data into interactive, actionable insights. Here is the final result with t
 
 ![Sales Report 2016](Images/image.png)
 
-![What if Parameter](image-6.png)
+![What if Parameter](Images/image-6.png)
 
 # Insights 
 
