@@ -20,6 +20,20 @@ Profile data so you can learn more about a specific column before using it.
 Evaluate and transform column data types.
 Apply user-friendly naming conventions to columns and queries.
 
+// *** Code M:
+
+    Source = Excel.Workbook(File.Contents("C:\Users\Usuario\OneDrive\DATA\Data Projects\PowerBI\24.02.16\Budget.xlsx"), null, true),
+    Budget_Sheet = Source{[Item="Budget",Kind="Sheet"]}[Data],
+    #"Removed Top Rows" = Table.Skip(Budget_Sheet,3),
+    #"Promoted Headers" = Table.PromoteHeaders(#"Removed Top Rows", [PromoteAllScalars=true]),
+    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Category", type text}, {"Subcategory", type text}, {"ProductName", type text}, {"ProductKey", Int64.Type}, {"Jan, 2016", Int64.Type}, {"Feb, 2016", Int64.Type}, {"Mar, 2016", Int64.Type}, {"Apr, 2016", Int64.Type}, {"May, 2016", Int64.Type}, {"Jun, 2016", Int64.Type}, {"Jul, 2016", Int64.Type}, {"Aug, 2016", Int64.Type}, {"Sep, 2016", Int64.Type}, {"Oct, 2016", Int64.Type}, {"Nov, 2016", Int64.Type}, {"Dec, 2016", Int64.Type}, {"Grand Total", Int64.Type}}),
+    #"Filtered Rows" = Table.SelectRows(#"Changed Type", each not Text.Contains([Category], "Total")),
+    #"Removed Columns" = Table.RemoveColumns(#"Filtered Rows",{"Grand Total"}),
+    #"Unpivoted Columns" = Table.UnpivotOtherColumns(#"Removed Columns", {"Category", "Subcategory", "ProductName", "ProductKey"}, "Attribute", "Value"),
+    #"Changed Type1" = Table.TransformColumnTypes(#"Unpivoted Columns",{{"Attribute", type date}, {"Value", type number}}),
+    #"Renamed Columns" = Table.RenameColumns(#"Changed Type1",{{"Attribute", "Month"}, {"Value", "BudgetAmount"}})
+
+
 
 ![Transform Data](image-2.png)
 
