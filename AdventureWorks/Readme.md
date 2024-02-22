@@ -54,6 +54,8 @@ Code M:
 Turn data into interactive, actionable insights. Configure report visuals: Filter, group, summarize.
 ![Sales Report](image.png)
 
+![Decomposition Tree](image-6.png)
+
 ## Optimize the model
 
 ## Security
