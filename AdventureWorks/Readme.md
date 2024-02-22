@@ -82,7 +82,7 @@ Some of the measures and calculate tables and columns are the following:
 ## Visualization
 Turn data into interactive, actionable insights. Here is the final result with the information provided for Adventure Works.
 
-![Sales Report 2016](image.png)
+![Sales Report 2016](Images/image.png)
 
 ![What if Parameter](image-6.png)
 
@@ -100,3 +100,7 @@ In scrutinizing sales patterns across the week, it is evident that Sundays and M
 
 > [!NOTE]
 > Thanks to Microsoft Learn. This self-paced way was useful to prepare my training in Power BI. https://learn.microsoft.com/en-gb/credentials/certifications/power-bi-data-analyst-associate/ 
+
+## Stay Tuned
+
+Please visit my [**website**](https://lorenamendezg.github.io/) to know about me, contact me or hire me!
