@@ -1,6 +1,6 @@
 # Adventure Works: Sales Report
 
-I am currently pursuing the Microsoft Certified: Power BI Data Analyst Associate certification. To facilitate my preparation, I have actively engaged in self-paced learning, utilizing this dataset to undertake various exercises and activities related to the certification requirements.
+I have dedicated myself to continuous skill enhancement through Microsoft's self-paced learning modules, with a specific focus on advancing my proficiency in PowerBI. Leveraging the insightful Adventure Works dataset, I have diligently undertaken a series of exercises and activities to apply and reinforce my PowerBI skills. This project encapsulates the culmination of my efforts, presenting a comprehensive analysis of sales performance during the year 2016, profitability by product category, and a detailed examination of sales point dynamics throughout the week. 
 
 ## Prepare data for analysis
 
@@ -45,8 +45,8 @@ Code M:
 - Measures, Calculate tables and columns:
 Some of the measures and calculate tables and columns are the following:
     
-    ## Measures
-    Delivery Qty = CALCULATE(COUNT(Sales[SalesOrderNumber]), USERELATIONSHIP(Sales[ShipDate],'Calendar'[Date]))
+    > Measures
+    ```Delivery Qty = CALCULATE(COUNT(Sales[SalesOrderNumber]), USERELATIONSHIP(Sales[ShipDate],'Calendar'[Date]))
     Profit = [Total Revenue] - [ProductCost]
     Qty Products Sold = SUM(Sales[OrderQuantity])
     TOP10 Products = SUMX(
@@ -58,16 +58,16 @@ Some of the measures and calculate tables and columns are the following:
     Count Rows = COUNTROWS(Sales)
     Qty Shipped = DISTINCTCOUNT(Sales[SalesOrderLineNumber])
     Max Price = MAX(Sales[UnitPrice])
-    Mini Price = MIN(Sales[UnitPrice])
+    Mini Price = MIN(Sales[UnitPrice])```
     
-    ## Calculate Tables
-    Pct Sales Forecast = GENERATESERIES(CURRENCY(1), CURRENCY(1.5), CURRENCY(0.05))
+    > Calculate Tables
+   ``` Pct Sales Forecast = GENERATESERIES(CURRENCY(1), CURRENCY(1.5), CURRENCY(0.05))
     Pct Sales Forecast Value = SELECTEDVALUE('Pct Sales Forecast'[Pct Sales Forecast], 100)
-    Ship Date = 'Date'
+    Ship Date = 'Date'```
 
-    ## Calculate Columns
-    Days to Send = DATEDIFF(Sales[OrderDate], Sales[ShipDate] ,DAY)
-    Total Sales Amount = Sales[SalesAmount] + Sales[TaxAmt]
+    > Calculate Columns
+    ```Days to Send = DATEDIFF(Sales[OrderDate], Sales[ShipDate] ,DAY)
+    Total Sales Amount = Sales[SalesAmount] + Sales[TaxAmt]```
 
 ![Measures](image-4.png)
 
@@ -94,4 +94,5 @@ The product category demonstrating the most substantial profit margin is accesso
 Sales Point Performance by Day of the Week:
 In scrutinizing sales patterns across the week, it is evident that Sundays and Mondays consistently record the highest sales figures. In contrast, Fridays exhibit the lowest sales performance throughout the year. Understanding and leveraging these day-specific trends could inform targeted marketing or operational strategies to maximize sales potential.
 
-
+> [!Thanks to Microsoft Learn]
+> This self-paced way was useful to prepare my training in Power BI. https://learn.microsoft.com/en-gb/credentials/certifications/power-bi-data-analyst-associate/ 
