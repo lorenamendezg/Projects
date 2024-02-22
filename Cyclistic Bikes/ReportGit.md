@@ -176,6 +176,6 @@ head(an2)
 
 ## Stay Tuned
 
-Please visit my [**website**](https://lorenamendezg.github.io/) to know
-about me, my projects and my new road for the data world. Comments, bug
-reports and pull requests are always welcome.
+Please visit my [**website**](https://lorenamendezg.github.io/) to know about me, contact me or hire me!
+
+
